@@ -1,0 +1,97 @@
+\section{Exercises from Lecture 3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 3.24}
+
+\emph{Consider the problem}
+\begin{equation}
+    u^* := \argmin_{u: [0,1] \to \mathbb{R}} J(u) := \frac{1}{2} \int_0^1 \left( x(t)^2 + Pu(t)^2 \right) dt 
+\end{equation}
+
+\emph{subject to}
+\begin{equation}
+    \dot{x}(t) = u(t), \hspace{0.5cm} x(0) = 1, \hspace{0.5cm} x(1) = \text{free}
+\end{equation}
+\emph{where $P>0$ us a weighting parameter. Find an optimal solution $u^*$ and $x^*$ using the Euler-Lagrange condition.}\\
+\\
+\emph{Discuss how the solution changes as $P \to \infty$ and $P \to 0$. Provide an intuitive explanation of the phenomenon.}\\
+\\
+\textbf{Solution:}\\
+\\
+We can consider this problem as a fixed-time, free-endpoint problem subject to the Euler Lagrange Equations. The first step is to calculate the Hamiltonian. First, let's calculate the Lagrangian as:
+\begin{equation}
+    L(t, x(t), u(t)) = \frac{1}{2} \left( x(t)^2 + Pu(t)^2 \right) 
+\end{equation}
+The Hamiltonian will be calculated as:
+\begin{align}
+    H \left( t, x(t), u(t), p(t) \right) &= \langle p(t), f \left( (t), x(t), u(t) \right) \rangle - L(t, x(t), u(t)) =  \cdots \\
+    \cdots &= p(t)u(t) - \frac{1}{2} x(t)^2 - \frac{P}{2}u(t)^2    
+\end{align}
+Now, we have to calculate the adjoint vector $p(t)$ which satisfies the following differential equation:
+\begin{align}
+    &\dot{p}(t) = - H_x (t,x(t), u(t), p(t)) = x(t) \\
+    &\text{with } p(1) = -K_x (1, x^*(1)) = 0 \text{ (since there is no terminal cost) }
+\end{align}
+
+Therefore, $ \dot{p}(t) =x(t)$ ,with the final state condition $ p(1) = 0 $. Now, we have the first order condition on the Hamiltonian of:
+\begin{equation}
+    H_u(t, x(t), u(t), p(t)) = p(t) -Pu(t) = 0
+\end{equation}
+from which we obtain $ u(t) = \frac{p(t)}{P}$. We can summarize the influence on the state as 
+\begin{equation}
+    \dot{x}(t) = p(t) = Pu(t)
+\end{equation}
+We have the two-point boundary value problem (\emph{TPBVP}) stated as follows:
+\begin{equation}
+    \begin{cases}
+        &\dot{x}(t) = p(t), \hspace{0.5cm} t_0 = 0, \hspace{0.5cm} x(0) =1\\
+        &\dot{p}(t) = x(t), \hspace{0.5cm} t_f = 1, \hspace{0.5cm} p(1) = 0\\
+    \end{cases}
+\end{equation}
+We can observe that $\Ddot{x}(t) = \dot{p}(t) = x(t)  \Longrightarrow \Ddot{x}(t) = x(t)$. We solve this second order differential equation whose solution is:
+\begin{equation}
+    \begin{cases}
+        &x(t) = c_1 e^t + c_2 e^{-t} \\
+        &p(t) = \dot{x}(t) = c_1 e^t - c_2 e^{-t}
+    \end{cases}
+\end{equation}
+Now, we can obtain the values of $c_1$ and $c_2 $ from the boundary conditions:
+\begin{equation}
+    \begin{cases}
+        &x(0) = 1 \Longrightarrow x(0) = c_1 +c_2 = 1\\
+        &p(1) = 0 \Longrightarrow p(1) = c_1 e - c_2 e^{-1} \Longrightarrow c_2 = c_1 e^2
+    \end{cases}
+\end{equation}
+from which we obtain
+\begin{equation}
+    \begin{cases}
+        &c_1 = \frac{1}{1 + e^2}\\
+        &c_2 = \frac{e^2}{1+e^2}
+    \end{cases}
+\end{equation}
+The optimal solution then becomes:
+\begin{equation}
+    \begin{cases}
+        &x^* (t) = \frac{1}{1 + e^2} e^t + \frac{e^2}{1+e^2} e^{-t}\\
+        &p^* (t) = \frac{1}{1 + e^2} e^t - \frac{e^2}{1+e^2} e^{-t} \\
+        &u^* (t) = \frac{p^*(t)}{P} = \frac{1}{P(1 + e^2)} e^t - \frac{e^2}{P(1+e^2)} e^{-t} 
+    \end{cases}
+\end{equation}
+where $ t \in [0,1]$. We will now discuss about the influence of the weighting value $P$ on the control input.
+\begin{enumerate}
+    \item Case $P \to 0$:
+    \begin{align}
+         \lim_{P \to \infty} u^* (t) &= \lim_{P \to \infty} \frac{1}{P(1+e^2)} \left( e^t - e^2 e^{-t} \right)  = \cdots \\
+         \cdots &= \lim_{P \to \infty} \frac{e^t}{P(1+e^2)} \left(1 - e^{2(1-t)} \right) = - \infty, \hspace{0.5cm} t \in [0,1]
+    \end{align}
+    In this case, we can deduce that the weighting $P$ going to zero makes the control input diverge: intuitively, the more the input is muffled, the larger the control input will be in its absolute value to obtain the optimal trajectory.
+    \item Case $P \to \infty$:
+    \begin{align}
+         \lim_{P \to \infty} u^* (t) &= \lim_{P \to \infty} \frac{1}{P(1+e^2)} \left( e^t - e^2 e^{-t} \right)  = \cdots \\
+         \cdots &= \lim_{P \to \infty} \frac{e^t}{P(1+e^2)} \left(1 - e^{2(1-t)} \right) = 0, \hspace{0.5cm} t \in [0,1]
+    \end{align}
+    In this case, we can deduce that the weighting $P$ going to infinity makes the control input go to zero: this means that, the more the input is amplified, the smaller the control input's absolute value will be to obtain the optimal trajectory.
+\end{enumerate}
+\QEDB
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

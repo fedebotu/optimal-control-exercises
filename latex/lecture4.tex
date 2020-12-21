@@ -1,0 +1,526 @@
+\section{Exercises from Lecture 4}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 4.10}
+\emph{Solve the problem}
+
+\begin{align}
+    &u^* := \argmin_{u:[0,t_f] \to [-1, 1]} J := t_f \\
+    &\text{subject to} \\
+    &\begin{cases}
+        &\Dot{x}_1(t) = -4 x_1(t) + 2x_2(t) + 2u(t)\\
+        &\Dot{x}_2(t) = 3x_1(t) -3x_2(t)
+    \end{cases}
+    \smallspace
+    \begin{cases}
+        &x_1(0) = x_0 \smallspace x_2(0) = 0 \\
+        &x_1(t_f) = 0, \smallspace x_2(t_f) = 0
+    \end{cases}
+\end{align}
+\\
+\\
+\textbf{Solution:}\\
+\\
+For simplicity, let us consider the simplified notation $x = x(t)$, $u = u(t)$ and $p = p(t)$. We first calculate the Hamiltonian as
+\begin{equation}
+\label{eq:hamiltonian}
+    H(t, x, u, p, p_0) = \langle p, f(t, x, u) \rangle + p_0L(t, x, u)
+\end{equation}
+
+ In this case, $L=0$; the Hamiltonian will be
+\begin{align}
+    H(t, x, u, p, p_0) &= \langle (p_1, p_2), (-4x_1 + 2x_2 + 2u, 3x_1 -3x_2) \rangle + \cancelto{0}{p_0 L(t, x, u)} \\
+    &= p_1(-4x_1 + 2x_2 + 2u) + p_2(3x_1 -3x_2)
+\end{align}
+
+Let's consider the set $\mathcal{U} = [-1, 1]$ for which $u \in \mathcal{U}$. Then, by the Pontryagin's maximum principle, we have
+
+\begin{align}
+    u^* &= \argmax_{u \in \mathcal{U}} H(t, x^*, u, p^*)\\
+    &=  \argmax_{u \in \mathcal{U}} p_1^*(-4x_1 + 2x_2 + 2u) + p_2^*(3x_1 -3x_2) \\
+    &=  \argmax_{u \in \mathcal{U}} 2p_1^* u \\
+    &= \begin{cases}
+        1 &\text{ if } p_1^* > 0 \\
+        -1 &\text{ if } p_1^* < 0 \\
+        \text{any number} \in \mathcal{U} &\text{ if } p_1^* = 0 \\
+    \end{cases} 
+\end{align}
+
+Where the value of $p_1^*$ can be found by the costate optimality equation, which is independent from $p_0$ in this case: 
+\begin{equation}
+    \Dot{p}^* = - H_x(t, x^*, u^*, p^*) = 
+    \begin{bmatrix}
+    4p_1^* -3p_2^* \\
+    -2p_1^* +  3p_2^*\\ 
+\end{bmatrix}
+\end{equation}
+By solving the differential equations we obtain
+\begin{equation}
+    \begin{bmatrix}
+    p_1^*\\
+    p_2^*
+    \end{bmatrix}
+    = \frac{1}{5} e^t
+    \begin{bmatrix}
+    c_1  (3 e^{5 t} + 2) - 3 c_2 (e^{5 t} - 1) \\
+    c_2 (2 e^{5 t} + 3) - 2 c_1 (e^{5 t} - 1) \\
+    \end{bmatrix}
+    \smallspace c_1, c_2 \in \mathbb{R}
+\end{equation}
+
+In order to get the switching time for solving $p_1^*(t) = 0$, the following ODE can be solved by imposing the condition on the derivative of the state for the Hamiltonian; along with the intial and final conditions:
+\begin{equation}
+    \Dot{x}^* = H_p(t, x^*, u^*, p^*)
+\end{equation}
+which becomes
+\begin{align}
+    \begin{bmatrix}
+        &\Dot{x}^*_1\\
+        &\Dot{x}^*_2
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        &-4x_1 +2x_2 +2u\\
+        &3x_1 - 3x_2
+    \end{bmatrix}\\
+\end{align}
+
+Which yields
+
+\begin{equation}
+\begin{bmatrix}
+    x_1^*\\
+    x_2^*
+    \end{bmatrix}
+    = \frac{1}{5} e^{-6t} 
+    \begin{bmatrix}
+    k_1  (2 e^{5 t} + 3) + 2 k_2 (e^{5 t} - 1) \\
+    3k_1 ( e^{5 t} - 1) +  k_2 (3e^{5 t} + 2) \\
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+    1\\
+    1\\
+    \end{bmatrix}
+    \smallspace k_1, k_2 \in \mathbb{R}, \smallspace p^*(t) \geq 0
+\end{equation}
+
+\begin{equation}
+\begin{bmatrix}
+    x_1^*\\
+    x_2^*
+    \end{bmatrix}
+    = \frac{1}{5} e^{-6t} 
+    \begin{bmatrix}
+    k_1  (2 e^{5 t} + 3) + 2 k_2 (e^{5 t} - 1) \\
+    3k_1 ( e^{5 t} - 1) +  k_2 (3e^{5 t} + 2) \\
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+    -1\\
+    -1\\
+    \end{bmatrix}
+    \smallspace k_1, k_2 \in \mathbb{R}, \smallspace p^*(t) < 0
+\end{equation}
+
+After obtaining the switching time, for which $p_1^*$ changes sign, we can rewrite the controller by choosing $u^* = 1$ if $p_1^* = 0$. Therefore, the general solution is a \emph{bang-bang controller} (in which the controller switches abruptly between two inputs). We can rewrite the controller as:
+\begin{equation}
+u^*(t) = 
+    \begin{cases}
+        1 &\text{ if } p_1^* \geq 0 \\
+        -1 &\text{ if } p_1^* < 0 \\
+    \end{cases}
+\end{equation}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 4.11 (Linear-quadratic problem)}
+
+\emph{Solve the problem}
+
+\begin{align}
+    &u^* := \argmin_{u:[0,T] \to \mathbb{R}} J(u) := \frac{1}{2}q \cdot x(T)^2 + \frac{1}{2} \int_0^T u(t) ^2 dt \\
+    &\text{subject to}\\
+    &\Dot{x}(t) = ax(t) + bu(t), \smallspace x(0) = x_0
+\end{align}
+
+\emph{where a, b are given nonzero scalars, $x_0 \in \mathbb{R}$ is an initial state, $T > 0 $ is a  fixed final time, and $q > 0$ is a given positive scalar.}
+\\
+\\
+\textbf{Solution:}\\
+\\
+We consider as usual the simplified notation $x = x(t)$, $u = u(t)$ and $p = p(t)$. We first calculate the Hamiltonian as
+\begin{equation}
+\label{eq:hamiltonian}
+    H(t, x, u, p, p_0) = \langle p, f(t, x, u) \rangle + p_0L(t, x, u)
+\end{equation}
+We assume the following: we can consider $p_0 = -1$, given that this problem is in $\mathbb{R}$: imposing it different than $-1$ would not change the result (which can be proved i.e. by finding out the condition for optimality: when we set the gradient to 0, being $p$ and $p_0$ both scalars, we could just eliminate $p_0$ by including it in the value of the new $p := p_{new}$.) We will consider this assumption also for the other scalar problems.\\
+\\
+The Hamiltonian in this case then becomes:
+\begin{equation}
+    H(t, x, u, p) = p(ax + bu) - \frac{1}{2}u^2
+\end{equation}
+By applying Pontryagin's maximum principle, we can find $u^*(t)$ by maximizing the Hamiltonian:
+\begin{equation}
+    u^*(t) = \argmax_{u \in \mathbb{R}} \left[ p(ax + bu) - \frac{1}{2}u^2 \right]
+\end{equation}
+Which given that the problem is concave, we can find by setting the first derivative equal to zero:
+\begin{align}
+   &\frac{\partial H}{\partial u} = pb - u = 0\\
+   &\Longrightarrow u^*(t) = p^*(t)b
+\end{align}
+
+Then, we may find the optimal $p^*$ by satisfying the following equation:
+\begin{equation}
+    \Dot{p}^* = - H_x(t, x^*, u^*, t^*) = - \frac{\partial}{\partial x}  \left[ p(ax + bu) - \frac{1}{2}u^2 \right]  = - pa
+\end{equation}
+Solving this simple ODE yields
+\begin{equation}
+    p^*(t) = c_1 e^{-at}
+\end{equation}
+In order to satisfy the boundary condition, we can get the value of $c_1$:
+\begin{align}
+    &p^*(T) = -K_x(T, x^*(T)) = - \frac{\partial}{\partial x} \left[ \frac{1}{2}q \cdot x(T)^2 \right] = -qx^*(T)\\
+    &\Longrightarrow p^*(T) = c_1 e^{-a T} = - q x(T)\\
+    &\Longrightarrow c_1 = -q x(T) e^{aT}\\
+\end{align}
+By substituting $c_1$ into the previous expression, we can get the value for the optimal $p$ as
+\begin{equation}
+    p^*(t) = -qx^*(T)e^{a(T-t)}
+\end{equation}
+In which the optimal final point $x^*(T)$ can be obtained by solving the differential equation related to the state. Finally, we get the expression for the optimal control:
+\begin{equation}
+    u^*(t) = -bqx^*(T)e^{a(T-t)}
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 4.12 (Control of production and consumption)}
+
+\emph{Suppose we own a factory whose output we can control. Let us begin to construct a mathematical model by setting}
+
+\begin{enumerate}
+    \item \emph{$x(t)$: amount of output produced at time $ t \in [0,T]$}
+    \item \emph{$u(t)$: fraction of output reinvested at time $t \in [0,T]$}
+\end{enumerate}
+
+\emph{This will be our control, and is subject to the obvious constrain that }
+\begin{equation}
+    u(t) \in [0,1]
+\end{equation}
+
+\emph{Given such a control, the corresponding dynamics are provided by the ODE}
+
+\begin{align}
+    &\Dot{x}(t) = ku(t)x(t) \\
+    &x(0) = x_0
+\end{align}
+
+\emph{where the constant $k >0$ modeling the growth rate of our reinvestment and $u(t)x(t)$ is the amount of reinvested output. Let us take as a payoff functional}
+
+\begin{equation}
+    J(u) = \int_0^T (1 - u(t))x(t)dt
+\end{equation}
+
+\emph{where $(1-u(t))x(t)$ is our consumption. The meaning is that we want to maximize our total consumption of the output.}\\
+\emph{The overall problem is:}
+\begin{align}
+    &u^* := \argmax_{u:[0,T] \to [0,1]} J(u) = \int_0^T (1-u(t))x(t)dt \\
+    &\text{subject to}\\
+    &\Dot{x}(t) = ku(t)x(t)\\
+    &x(0)=x_0
+\end{align}
+
+\emph{Find an optimal control policy for this problem.}
+\\
+\\
+\textbf{Solution:}\\
+\\
+The problem can be rewritten as:
+\begin{align}
+    &u^* := \argmin_{u:[0,T] \to [0,1]} J(u) = \int_0^T -(1-u(t))x(t)dt \\
+    &\text{subject to}\\
+    &\Dot{x}(t) = ku(t)x(t)\\
+    &x(0)=x_0
+\end{align}
+where minimizing the negative cost functional is the same as maximizing the positive one.
+We consider the Hamiltonian formulation as in the Equation \ref{eq:hamiltonian} and for simplicity we consider the notation $x = x(t)$, $u = u(t)$ and $p = p(t)$, considering the scalar case. The Hamiltonian will be:
+\begin{equation}
+    H(t, x, p, u) = p k u x + (1-u)x
+\end{equation}
+We can write the costate equation:
+\begin{equation}
+    \Dot{p}(t) = - H_x = -pku - (1 -u)  = -1 -u(pk - 1)
+\end{equation}
+Let's consider the set $\mathcal{U} = [0, 1]$ for which $u \in \mathcal{U}$. Then, by the Pontryagin's maximum principle, we have the following
+\begin{align}
+    u^*(t) &= \argmax_{u \in \mathcal{U}} H (t, x^*, u, p^*)\\
+    &= \argmax_{u \in \mathcal{U}} p k u x + (1-u)x\\
+    &= \argmax_{u \in \mathcal{U}} (pk-1)ux + x\\
+    &=  \begin{cases}
+        1 &\text{ if } p^* > \frac{1}{k} \\
+        0 &\text{ if } p^* \leq \frac{1}{k}\\
+    \end{cases} 
+\end{align}
+We notice that this is a \emph{bang-bang} controller with a switching time controlled by the costate equation. By solving the costate equation, we can get the switching time. The terminal condition is
+\begin{equation}
+    p(T) = K_x(x(T)) = 0
+\end{equation}
+Therefore the ODE for the costate becomes:\\
+\begin{equation}
+    \begin{cases}
+        &\Dot{p}^*(t) = -1 -u^*(t)(p^*(t)k - 1)\\
+        &p^*(T) = 0
+    \end{cases}
+\end{equation}
+
+Since $p(T) = 0$ and $k > 0$, then by continuity for $t$ close to the final time $T$ we have that $p(t) \leq \frac{1}{k}$. In this case, $u^*(t) = 0$ and the ODE becomes:
+\begin{equation}
+    \begin{cases}
+        &\Dot{p}^*(t) = -1\\
+        &p^*(T) =0\\
+        &\Longrightarrow p^*(t) = T - t, \smallspace p^*(t) \leq \frac{1}{k}
+    \end{cases}
+\end{equation}
+By which we can find the switching time $\hat{t}$:
+\begin{align}
+    &T - \hat{t} = \frac{1}{k}\\
+    &\Longrightarrow \hat{t} = T - \frac{1}{k}
+\end{align}
+Therefore, the optimal control we found is:
+\begin{equation}
+    u^*(t) = \begin{cases}
+        1 &\text{ if } t \in [0, \hat{t}) \\
+        0 &\text{ if } t \in [\hat{t}, T]\\
+    \end{cases} 
+    \smallspace \text{for } \hat{t} = T - \frac{1}{k}
+\end{equation}
+    
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 4.13}
+\emph{A young investor has earned in the stock market a large amount of  money S and plans to spend it so as to maximize his enjoyment through the rest of his life without working. He estimates that he will live exactly T more years and that his capital $x(t)$ should be reduced to zero at time T, i.e., $x(T) = 0$. Also he models the evolution of his capital by the differential equation}
+
+\begin{equation}
+    \Dot{x}(t) = \alpha x(t) - u(t)
+\end{equation}
+
+\emph{where $x(0) = S$ is his initial capital, $\alpha > 0$ is a given interest rate, and $u(t) \geq 0 $ is his rate of expenditure. The total enjoyment he will obtain is given by }
+\begin{equation}
+    \int_0^T e^{-\beta t} \sqrt{u(t)}dt
+\end{equation}
+
+\emph{Here $\beta$ is some positive scalar, which serves to discount the future enjoyment. Find the optimal control $u^* (t), t \in [0, T]$.}
+\\
+\\
+\textbf{Solution:}\\
+\\
+The problem can be written as
+\begin{align}
+    &u^* := \argmin_{u:[0,T] \to \mathbb{R}} J(u) = \int_0^T -e^{-\beta t} \sqrt{u(t)}dt \\
+    &\text{subject to}\\
+    &\Dot{x}(t) = \alpha x(t) - u(t), \smallspace x(0) = S, \smallspace x(T)=0
+\end{align}
+where minimizing the negative enjoyment is the same as maximizing the positive one.\\
+We first calculate the Hamiltonian as in Equation \ref{eq:hamiltonian} with the simplified notation $x = x(t)$, $u = u(t), p = p(t)$, considering that the problem is with scalar variables only:
+\\
+\begin{equation}
+    H(t, x, u, p) = p(\alpha x -u) + e^{-\beta t} \sqrt{u}
+\end{equation}
+
+Then, the costate equation is as following:
+\begin{equation}
+    \Dot{p} = -H_x(t, x^*, u^*, p) = -\alpha p
+\end{equation}
+Solving this differential equation we get that $p(t) = c_1 e^{-\alpha t}$. The maximizing $u^*$ will be:
+\begin{align}
+    u^* &= \argmax_{u \in [0, T]} H(x^*, u, p)\\
+    &= \argmax_{u \in [0, T]} \left( p(\alpha x^* -u)  + e^{-\beta t} \sqrt{u} \right)
+\end{align}
+Which is a maximum if the first derivative is equal to zero and the second derivative is $\leq 0$. Thus:
+\begin{align}
+    \frac{d}{du} H &= e^{-\beta t} \frac{1}{2} u ^{- \frac{1}{2}} - p = 0\\
+    & \Longrightarrow u^*(t) = \frac{1}{4p^2} e^{-2 \beta t} 
+\end{align}
+also
+\begin{align}
+    \frac{d^2}{du^2} H &= -e^{-\beta t} \frac{1}{4} u ^{- \frac{3}{2}} \leq 0\\
+\end{align}
+So, we verified that $u^*(t) = \frac{1}{4p^2} e^{-2 \beta t}$ is indeed a maximum. Plugging $p$ in we get
+\begin{equation}
+    u^*(t) = \frac{1}{4c_1^2}e^{(2 \alpha - 2 \beta) t}
+\end{equation}
+
+In order to obtain the optimal solution, we need to solve the linear ODE given by the state
+\begin{equation}
+    \Dot{x} = \alpha x - \frac{1}{4c_1^2} e^{(2 \alpha - 2 \beta) t}
+\end{equation}
+
+The solution to the ODE will be in the form $x(t) = x_h(t) + x_p(t) $ where $x_h(t)$ is the \textit{homogeneous solution} and $x_p(t)$ is a \textit{particular solution} . 
+The homogeneous solution is:
+\begin{equation}
+    x_h(t) = c_2 e^{\alpha t}, \smallspace c_2 = \text{ constant}
+\end{equation}
+The particular solution can be divided in two cases:
+
+\begin{enumerate}
+    \item Case: $\alpha \neq 2\beta$:
+    Solving the ODE we get the general solution:
+    \begin{equation}
+        x(t) = x_h(t) + x_p(t) = c_2 e^{\alpha t} - \frac{1}{4c_1^2 (\alpha - 2\beta)} e^{(2 \alpha - 2 \beta) t}
+    \end{equation}
+    Given the initial condition of $x(0) = S$ and $x(T) = 0$ we get the unknown coefficients:
+    \begin{align}
+        \frac{1}{4c_1^2} &= \frac{-S(\alpha - 2 \beta}{1 - e^{(\alpha - 2 \beta) T}}\\
+        c_2 &= \frac{-S e^{\alpha - 2\beta)T}}{1 - e^{(\alpha - 2 \beta) T}}
+    \end{align}
+    \item Case $\alpha = 2\beta$:
+    Solving the ODE we get the general solution:
+    \begin{equation}
+        x(t) = x_h(t) + x_p(t) = c_2 e^{\alpha t} - \frac{1}{4c_1^2} t e^{\alpha t}
+    \end{equation}
+    Given the initial condition of $x(0) = S$ and $x(T) = 0$ we get the unknown coefficients:
+    \begin{align}
+        \frac{1}{4c_1^2} &= \frac{S}{T}\\
+        c_2 &= S
+    \end{align}
+\end{enumerate}
+
+Therefore, the optimal control $u^*$ will be: \\
+\begin{equation}
+u^*(t) = 
+\begin{cases}
+    \begin{aligned}
+        \item \frac{S(2\beta - \alpha)}{1- e^{(\alpha - 2\beta)T}} e^{(2 \alpha - 2\beta) t }, \smallspace &\text{for } \alpha \neq 2 \beta \\ 
+        \item \frac{S}{T} e^{(2\alpha - 2\beta) t} = \frac{S}{T} e^{\alpha t}, \smallspace &\text{for } \alpha = 2 \beta
+    \end{aligned}
+\end{cases}
+\end{equation}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 4.14}
+
+\emph{Solve the problem}
+\begin{align}
+    &u^* := \argmin_{u:[0,T] \to \mathbb{R}} J(u) = \int_0^T \sqrt{1 + u(t)^2}dt \\
+    &\text{subject to}\\
+    &\Dot{x}(t) = u(t), \smallspace x(0)=x_0
+\end{align}
+\emph{where $x_0 \in \mathbb{R}$ is an initial state, $T>0$ is a fixed final time.}
+\\
+\\
+\textbf{Solution:}\\
+\\
+For simplicity, let us consider the simplified notation $x = x(t)$, $u = u(t)$ and $p = p(t)$. We first calculate the Hamiltonian as
+\begin{equation}
+\label{eq:hamiltonian}
+    H(t, x, u, p, p_0) = \langle p, f(t, x, u) \rangle + p_0L(t, x, u)
+\end{equation}
+
+Given that the problem is with scalar variables only, we can write the Hamiltonian as: 
+
+\begin{equation}
+    H(t, x, u, p) = pu - \sqrt{1+u^2}
+\end{equation}
+
+Since the function is concave, we can find the maximal for the Hamiltonian by setting the derivative with respect to $u$ equal to zero and considering the positive value for $u$:
+
+\begin{align}
+    \frac{\partial H}{\partial u} &= p - \frac{u}{\sqrt{1+u^2}} = 0\\
+    \Longrightarrow p^2 + p^2u^2 &= u^2\\
+    u^2 &= \left( \frac{p^2}{1 - p^2} \right)\\
+    \Longrightarrow u &= \sqrt{\frac{p^2}{1-p^2}}\\
+\end{align}
+
+If we apply the optimality condition for $p^*$, we get:
+\begin{align}
+    \Dot{p}^* &= - H_x = - \frac{\partial}{\partial x} \left[ pu - \sqrt{1+u^2} \right] = 0\\
+    &\Longrightarrow p^*(t) = K, \smallspace \text{where } K \in \mathbb{R}
+\end{align}
+Moreover, given that this is a fixed-time, free-endpoint problem, we can also apply the boundary condition:
+\begin{align}
+    p^*(T) = p_0^* K_x(x^*(T)) = 0
+\end{align}
+since the final cost $K$ is 0. Therefore, since the optimal $p^*(t)$ is constant, then $K = 0$ and we can write $p^*(t) = 0, \forall t \in [0,T]$. The optimal control then is:
+\begin{align}
+    u^*(t) &= \sqrt{\frac{p^*(t)^2}{1-p^*(t)^2}}\\
+    \Longrightarrow u^*(t) &= 0, \forall t \in [0, T]
+\end{align}
+
+In this case, given that $\Dot{x}(t) = u(t) = 0$, we will have that the state variable is constant; thus $x(t) = x(0) = x_0,  \forall t \in [0, T]$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 4.15}
+
+\emph{Solve the problem}
+\begin{align}
+    &u^* := \argmin_{u:[0,T] \to \mathbb{R}} J(u) = \int_0^T \sqrt{1 + u(t)^2}dt \\
+    &\text{subject to}\\
+    &\Dot{x}(t) = u(t), \smallspace x(0)=x_0, \smallspace x(T) = x_1
+\end{align}
+\emph{where $x_0 \in \mathbb{R}$ is an initial state, $T>0$ is a fixed final time.}
+\\
+\\
+\textbf{Solution:}\\
+\\
+Similarly to the previous exercise, let us consider the simplified notation $x = x(t)$, $u = u(t)$ and $p = p(t)$. We first calculate the Hamiltonian as
+\begin{equation}
+\label{eq:hamiltonian}
+    H(t, x, u, p, p_0) = \langle p, f(t, x, u) \rangle + p_0L(t, x, u)
+\end{equation}
+Given that the problem is with scalar variables only, we can write the Hamiltonian as: 
+\begin{equation}
+    H(t, x, u, p) = pu - \sqrt{1+u^2}
+\end{equation}
+
+Since the function is concave, we can find the maximal for the Hamiltonian by setting the derivative with respect to $u$ equal to zero:
+
+\begin{align}
+    \frac{\partial H}{\partial u} &= p - \frac{u}{\sqrt{1+u^2}} = 0\\
+    \Longrightarrow p^2 + p^2u^2 &= u^2\\
+    u^2 &= \left( \frac{p^2}{1 - p^2} \right)\\
+    \Longrightarrow u &= \sqrt{\frac{p^2}{1 - p^2}}\\
+\end{align}
+
+If we apply the optimality condition for $p^*$, we get:
+\begin{align}
+    \Dot{p}^* &= - H_x = - \frac{\partial}{\partial x} \left( pu - \sqrt{1+u^2} \right) = 0\\
+    &\Longrightarrow p^*(t) = K, \smallspace \text{where } K \in \mathbb{R}
+\end{align}
+
+We now need to consider the condition on $x(T) = x_1$. Hence, given that $x(0) = x_0$
+\begin{align}
+    \Dot{x} &= u\\ 
+    \Longrightarrow x(T) - x(0) &= \int_0^T u dt = \int_0^T \sqrt{\frac{p(t)^2}{1 - p(t)^2}} dt\\
+    &\text{since } p(t) = K \in \mathbb{R}, \text{$p$ does not depend on time $t$}\\
+    &= \int_0^T \sqrt{\frac{p^2}{1 - p^2}} dt = \sqrt{\frac{p^2}{1 - p^2}} T
+\end{align}
+By which we can obtain the value of $p$:
+
+\begin{align}
+    \left( \frac{x_1 - x_0}{t} \right)^2 = \frac{p^2}{1-p^2}\\
+\end{align}
+For simplicity, we can substitute 
+\begin{equation}
+    \left( \frac{x_1 - x_0}{T} \right)^2 =\mathcal{V}  
+\end{equation}
+which has the physical meaning of the velocity of the system. from which we get:
+\begin{align}
+    \mathcal{V}^2 &= \frac{p^2}{1 - p^2}\\
+    \Longrightarrow p &= \sqrt{\frac{\mathcal{V}}{1+\mathcal{V}}}
+\end{align}
+
+Then, plugging this $p^*$ back into the equation for the optimal control, we get:
+\begin{equation}
+    u^*(t) = \sqrt{\frac{p^2}{1-p^2}} = \sqrt{\frac{\frac{\mathcal{V}}{1+\mathcal{V}}}{1 - \frac{\mathcal{V}}{1 + \mathcal{V}}}} = \sqrt{\frac{\frac{\mathcal{V}}{\cancel{1+\mathcal{V}}}}{\frac{1 + \mathcal{V}- \mathcal{V}}{\cancel{1+\mathcal{V}}}}} = \sqrt{\mathcal{V}}
+\end{equation}
+By substituting back the value of $\mathcal{V}$, we get the optimal control as:
+\begin{equation}
+    u^*(t) = \frac{x_1 - x_0}{T}, \smallspace \forall t \in [0, T]
+\end{equation}
+
+Which means that the optimal control will be a constant velocity moving the system from $x_0$ to $x_1$.

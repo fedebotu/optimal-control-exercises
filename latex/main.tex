@@ -1,0 +1,130 @@
+\documentclass[12pt]{article}
+\usepackage[]{babel}
+\usepackage{natbib}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\DeclareMathOperator*{\argmax}{argmax} % thin space, limits underneath in displays
+\DeclareMathOperator*{\argmin}{argmin} % thin space, limits underneath in displays
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\usepackage{breqn} % Automatic equation breaker
+\usepackage{amssymb} %% <- for \square and \blacksquare
+\usepackage{breqn} % used for automatic equation breaking
+\newcommand{\QEDA}{\null\nobreak\hfill\ensuremath{\blacksquare}}%
+\newcommand{\QEDB}{\null\nobreak\hfill\ensuremath{\square}}%
+\newcommand{\smallspace}{\hspace{0.5cm}}
+\setcounter{secnumdepth}{0} % for avoiding the numbering
+\usepackage{hyperref} % to click and go to pointed place in the document
+\usepackage{tcolorbox} % if we want to use the boxes
+\usepackage{cancel} % for cool cancellations
+\newenvironment{sfemph}{\begin{sffamily}\begin{emph}}{\end{sffamily}\end{emph}}
+ % the text inside the exercise setup will be emphasized
+\usepackage{xcolor} % Colored text
+\usepackage{minted} % For highlighting Python code
+% Set defaults for minted
+\setminted{frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+bgcolor=,
+fontsize=\footnotesize,
+linenos
+}
+\usepackage{comment} %for multiline commenting
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MODIFY KAIST TEMPLATE DATA HERE
+
+\title{Exercise Book}							
+\author{Federico Berto}							
+\date{\today}											
+\newcommand{\professor}{Donghwan Lee}
+\newcommand{\studentid}{20204817}
+\newcommand{\coursename}{Optimal Control}
+\newcommand{\courseid}{EE688}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}% Default \headrulewidth is 0.4pt
+%\renewcommand{\footrulewidth}{0.4pt}% Default \footrulewidth is 0pt
+\rhead{\theauthor}
+%\rhead{\includegraphics[width=1cm]{example-image-a}}
+\lhead{\thetitle}
+\chead{\raisebox{-1ex}{\includegraphics[width = 3cm, shift down = 1cm]{kaist.png}}}
+\cfoot{Page \thepage}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+	\centering
+    \textsc{\LARGE  Korea Advanced Institute of Science \\ \smallskip and Technology}\\[1 cm]	% University Name
+    \includegraphics[scale = 0.18]{kaist_round_logo.png}\\[1.5 cm]	% University Logo
+
+	\textsc{\Large \coursename}\\[0.5 cm]				% Course Code
+	\rule{\linewidth}{0.2 mm} \\[0.4 cm]
+	{ \huge \bfseries {\thetitle}}\\
+	\rule{\linewidth}{0.2 mm} \\[1.5 cm]
+	
+
+	\begin{minipage}{0.5\textwidth}
+		\begin{flushleft} \large
+			\emph{Professor:}\\
+		    \professor \\ [0.5cm]
+            \emph{Course ID:}\\
+            \courseid
+			\end{flushleft}
+			\end{minipage}~
+			\begin{minipage}{0.4\textwidth}
+            
+			\begin{flushright} \large
+			\emph{Student:} \\
+			\theauthor \\[0.5cm]
+			\emph{ID number:}\\
+			\studentid \\
+		\end{flushright}
+        
+	\end{minipage}\\[2 cm]
+	
+	
+    %\thedate
+    
+    
+    
+	
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+\incl
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Include parts of the document
+\include{lecture1}
+\include{lecture2}
+\include{lecture3}
+\include{lecture4}
+\include{lecture5}
+\include{lecture6}
+
+\end{document}

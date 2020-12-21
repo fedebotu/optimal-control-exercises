@@ -1,0 +1,462 @@
+\section{Exercises from Lecture 2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 2.4}
+\emph{Find another example of a variational problem. Describe it verbally first, then formalize it by specifying admissible curves and giving an expression for the functional to be minimized or maximized. You do not need to solve it.}\\
+\\
+\textbf{Solution:}\\
+\\
+Let's take as an example of variational problem the shortest path in the plane connecting two different points $A$ and $B$. By intuition, we know that the solution of this problem will be a straight line connecting the two points; however, we can prove it by considering the problem as a variational problem.\\
+Let's consider the following Cartesian coordinates: $A = (x_0, y_0)$ and $B = (x_1, y_1)$ with $x_0 < x_1$, and the function $y(x) \in \mathcal{C}^2$ is the function describing the coordinate $y$ with respect to $x$. Moreover, $x_0 \leq x\leq x_1$. Therefore, we want to minimize the following cost functional:
+\begin{equation}
+    L  = \int_A^B ds =  \int_{x_o}^{x_1} \sqrt{dx^2 + dy^2} 
+\end{equation}
+Considering $dy = y'(x)dx$ yields to:
+\begin{equation}
+    \min\limits_{y:[x_0, x_1] \to [y_0, y_1]} \int_{x_0}^{x_1} \sqrt{1 + y'(x)^2} dx
+\end{equation}
+subject to
+\begin{equation}
+    y(x_0) = y_0, \hspace{1cm} y(x_1) = y_1
+\end{equation}
+\QEDB
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 2.21}
+\emph{Find an extremal for the problem}
+\begin{equation}
+    \min\limits_{y:[0,1] \to \mathbb{R}} J(y) = \int_0^1 y(x)^2 (y'(x))^2 dx \hspace{0.5cm} \text{subject to}\hspace{0.5cm} y(0) = 0, y(1) = 1 
+\end{equation}
+\\
+\textbf{Solution:}\\
+\\
+Let's consider the simplified notation $y(x) = y$ and $y'(x) = y'$ for convenience.\\
+The first step is to calculate the Lagrangian of the function, which is given by:
+\begin{equation}
+    L(x, y, y') = y^2 y'^2
+\end{equation}
+The derivatives of the Lagrangian are given by
+\begin{align}
+    &L_y = 2yy'^2\\
+    &L_y'= 2y^2y'
+\end{align}
+The Euler-Lagrange equation yields the following differential equation:
+\begin{equation}
+    yy'^2 = \frac{d}{dx} y^2 y'
+\end{equation}
+whose solutions are of the form $y(x) = c_2\sqrt{c_1 + 2x}$. Given the boundary conditions, we can get:
+\begin{equation}
+    \begin{cases}
+    &y(0) = 0 \\
+    &y(1) = 1 \\
+    \end{cases}
+    \Longrightarrow
+    \begin{cases}
+    &c_2\sqrt{c_1} = 0 \\
+    &c_2\sqrt{c_1 + 2} = 1 \\
+    \end{cases}
+    \Longrightarrow
+    \begin{cases}
+    &c_1 = 0\\
+    &c_2 = \frac{1}{\sqrt{2}}\\
+    \end{cases}
+\end{equation}
+therefore, an extremal for the problem will be:
+\begin{equation}
+    y(x) = 2\sqrt{x}
+\end{equation}
+\QEDB
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 2.22}
+\emph{Find an extremal for the problem}
+\begin{equation}
+    \min\limits_{y:[0,1] \to \mathbb{R}} J(y) = \int_0^1 \{ (y'(x))^2 + 2y(x)e^x \} dx \hspace{0.5cm} \text{subject to} \hspace{0.5cm} y(0) = 0, y(1) = 1 
+\end{equation}
+\\
+\textbf{Solution:}\\
+\\
+Let's consider the simplified notation $y(x) = y$ and $y'(x) = y'$ for convenience.\\
+The first step is to calculate the Lagrangian of the function, which is given by:
+\begin{equation}
+    L(x, y, y') = (y')^2 +2ye^x
+\end{equation}
+Then, we calculate the derivatives of the Lagrangian as:
+\begin{equation}
+    L_y = \frac{\partial}{\partial y } L(x, y ,y') = 2e^x
+\end{equation}
+\begin{equation}
+    L_{y'} = \frac{\partial}{\partial y' } L(x, y ,y') = 2y'
+\end{equation}
+The Euler-Lagrange equation becomes:
+\begin{equation}
+    2e^x = \frac{d}{d x}2 y'
+\end{equation}
+Which yields:
+\begin{align}
+    e^x &= \frac{d}{d x} y'\\
+    e^x &= y'' \\
+    \int e^x dx &= \int y'' dx\\
+    \int \left( e^x + c_0 \right) dx &= \int y' dx \\
+    e^x + c_0x + c_1 &= y
+\end{align}
+Applying the boundary conditions y(0) = 0 and y(1) = 1  yields:
+\begin{align}
+    1 + c_1 &= 0 \\
+    e +c_0 -1 &= 0 \\
+\end{align}
+by which we obtain $ c_0 = 1 -e$ and $ c_1 = -1$. So, the extremal for the problem is:
+\begin{equation}
+    y(x) = e^x  + (1-e) x -1 
+\end{equation}
+\QEDB
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 2.27 (The Brachistochrone Problem)}
+\emph{Use the no $x$ result to show that extremals for the brachistochrone problem are indeed given by}
+\begin{equation}
+    x(\theta) = a +c (\theta - sin(\theta), \hspace{0.5cm} y(\theta) = c(1 - cos(\theta))
+\end{equation}
+\emph{where the parameter $\theta$ takes values between 0 and $2\pi$ and $c > 0$ is constant.}
+
+\\
+\textbf{Solution:}\\
+\\
+Our goal is to find a path between two fixed points in a vertical plane such that a particle sliding without friction along this path takes the shortest possible time to travel from one point to the other. The problem can be formulated as following:
+\begin{align}
+    &\min_{y:[a,b] \to [0, \infty)} J(y) = \int_a^b \frac{\sqrt{1+ (y'(x))^2}}{\sqrt{y(x)}} \\
+    &\text{subject to } \\
+    &y(a) = y_0, \hspace{0.5cm}y(b) = y_1
+\end{align}
+Let's consider the simplified notation $y(x) = y$ and $y'(x) = y'$ for convenience. Moreover, we consider the problem starting at $x = 0$ for the sake of convenience.\\
+We can consider the \emph{no x} result of the Euler-Lagrange equations: in this case, the Lagrangian does not depend explicitly on $x$; therefore, the condition can be simplified as following:
+\begin{equation}
+    L - L_{y'}y' = \sqrt{\frac{1}{2c}} \text{ with }  c \in \mathbb{R}, \hspace{c >0}
+\end{equation}
+where $\sqrt{\frac{1}{2c}}$ is a non-negative constant. The reason why we chose this formulation will become clear during the derivation.\\
+Given the Lagrangian's formulation of $L = \frac{\sqrt{1+y'^2}}{\sqrt{y}}$, we can derive that:
+\begin{align}
+    \frac{\sqrt{1+y'^2}}{\sqrt{y}} - \frac{y'^2}{\sqrt{y}\sqrt{1+y'^2}} &= \sqrt{\frac{1}{2c}} \\
+    \frac{1}{\sqrt{y}\sqrt{1+y'^2}} &= \sqrt{\frac{1}{2c}} \\
+    \frac{1}{y} &= \frac{1}{2c}(1 + y'^2) = \cdots \\
+    \cdots \frac{1}{y} &= \frac{1}{2c} \left( 1 + \left( \frac{dy}{dx} \right) ^2 \right) \\
+    \frac{dy}{dx} &= \sqrt{\frac{2c - y}{y}} \\
+    dx &= \sqrt{\frac{y}{2c - y}} dy \\
+\end{align}
+We can operate the following substitution to make the integral easier: $y = c - ct$; $dy = -cdt$ yielding:
+\begin{equation}
+    dx = - c \sqrt{\frac{1 - t}{1 + t}} dt
+\end{equation}
+In order to proceed with the integration, we can recall the following trigonometric functions:
+\begin{align}
+    1 + \cos\theta &= 2 \cos^2(\theta/2) \\
+    1 - \cos \theta &= 2\sin^2(\theta/2) \\
+\end{align}
+So, operating the substitution $t = \cos \theta$; $dt = -\sin \theta d \theta$, we can rewrite the equation as:
+\begin{equation}
+    dx = c \sqrt{\frac{1 + \cos \theta}{1 - \cos\theta}} \sin \theta d\theta = c \sqrt{\frac{2\sin^2(\theta/2) }{2 \cos^2(\theta/2)}} = c \tan(\theta /2)  \sin \theta d\theta  \\
+\end{equation}
+Given that $\sin \theta = 2 \sin (\theta /2) \cos (\theta / 2) $ we get:
+\begin{equation}
+    dx = c \tan(\theta /2) \cdot 2 \sin (\theta /2) \cos (\theta / 2) d\theta = 2c \sin^2 (\theta / 2) d\theta = c(1 - \cos \theta) d \theta
+\end{equation}
+By integrating, we get:
+\begin{align}
+    \int dx &= \int c(1 - \cos \theta) d \theta \\
+    x(\theta)  &= c(\theta - \sin \theta)
+\end{align}
+We can obtain the value of $y$ noting that $t = \cos \theta$ and $y = c - ct$. So:
+\begin{equation}
+    y(\theta)  = c(1-cos \theta)
+\end{equation}
+Given the numerical conditions we could calculate the value of $c$. Moreover, if the value of $x$ does not start from 0 but it is translated of $a$, then we will translate the value of x by that amount; notice that this will not influence the value of $y$. Summarizing, the following equations describe a \emph{cycloid}:
+\begin{align}
+    & x(\theta) = a + c(\theta - \sin \theta) \\
+    & y(\theta) = c(1-cos \theta)
+\end{align}
+\QEDB
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 2.30}
+\emph{Confirm directly from the equations (2.10), (2.11), 2.12) (Hamilton's canonical equations) that in the "no y" case $p$ is constant along extremals and in the "no x" case $H$ is constant along extremals.}\\
+\\
+\textbf{Solution:}\\
+\\
+We first show that $p$ is constant along the extremals in the \emph{"no y"} case. Let's consider during the proofs, for the easier notation's sake, that $y(x) = y, y'(x) = y, p(x) = p$.\\
+The Hamilton's canonical equation for $p$ is:
+\begin{equation}
+    \frac{dp}{dx} = - H_y (x, y, y', p), \hspace{0.5cm} x \in [a,b]
+\end{equation}
+The Hamiltonian can be expressed as:
+\begin{equation}
+    H(x, y, y', p) = py' - L(x, y, y')
+\end{equation}
+Given the \emph{"no y"} case, then we can write:
+\begin{equation}
+    H(x, y', p) = py' - L(x, y')
+\end{equation}
+Thus, the Hamilton's canonical form yields
+\begin{align}
+    \frac{dp}{dx} &= - H_y (x, y', p), \hspace{0.5cm} x \in [a,b] \\
+    &= - \frac{d}{dy} \left( py' - L(x, y') \right) \\
+    &= - \cancelto{0}{\frac{d}{dy} py'} + \cancelto{0}{\frac{d}{dy} L(x, y')} \\
+    &= 0
+\end{align}
+Given that $\frac{dp}{dx} = 0$ then
+\begin{equation}
+    p(x) = constant
+\end{equation}
+thus showing that in the \emph{"no y"} case $p$ is constant along extremals.\\
+
+
+Now, let's show that $H$ is constant along extremals in the \emph{"no x"} case. The Hamiltonian can be expressed as:
+\begin{equation}
+    H(y, y', p) = py' - L(y, y')
+\end{equation}
+Given the \emph{"no y"} case, then we can write:
+\begin{equation}
+    H(y, y', p) = py' - L(y, y')
+\end{equation}
+We can derive with respect to $x$ the Hamiltonian yielding
+\begin{align}
+    \frac{d}{dx} H (y, y', p)&= \frac{d}{dx} \left( py' - L(y, y') \right) \\
+    &= \cancelto{0}{\frac{d}{dx} py'} - \cancelto{0}{\frac{d}{dx}L(y, y') }\\
+    &= 0
+\end{align}
+Hence, given that $\frac{d}{dx} H (y, y', p) = 0$ we can write that:
+\begin{equation}
+    H (y, y', p) = constant
+\end{equation}
+thus showing that in the \emph{"no x"} case the Hamiltonian $H (x, y, y', p)$ is constant along extremals.\
+\QEDB
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 2.36}
+\emph{Find the curve $y^*$ that minimizes}
+\begin{equation}
+    J(y) = \frac{1}{2} \int_0^1 y^' (x)^2 dx
+\end{equation}
+\emph{subject to the constraint}
+\begin{equation}
+    \int_0^1 y(x)dx = \frac{1}{6}
+\end{equation}
+\\
+\textbf{Solution:}\\
+\\
+Let's consider the simplified notation $y(x) = y$ and $y'(x) = y'$ for convenience.\\
+Thus, we can consider the first-order necessary condition for integral constrained optimality:
+\begin{equation}
+    \left( L_y - \frac{d}{dx}L_{y'} \right) + \lambda \left( M_y - \frac{d}{dx}M_{y'} \right) = 0, \hspace{0.5cm} \forall x \in [a,b]
+\end{equation}
+where $L = \frac{1}{2} y'^2$ and $M = y$. Substituting, we obtain:
+\begin{align}
+    \frac{d}{dx} y' + \lambda \cdot 1 &= 0 \\
+    y '' &=  - \lambda \\
+    & \text{Integrating twice, we get:  } \\
+    y' &= -\lambda x +c_1 \\
+    y &= \frac{-\lambda x^2}{2} + c_1x + c_2 \\
+\end{align}
+The optimal curve $y^*(x)$ is:
+\begin{equation}
+    y^*(x) &= \frac{- \lambda x^2}{2} + c_1x + c_2 \\
+\end{equation}
+Now, we can find the value of $\lambda$ given the integral constraint. So:
+\begin{align}
+    \int_0^1 \frac{- \lambda x^2}{2} + c_1x + c_2  dx &= \frac{1}{6} \\
+    \frac{- \lambda x^3}{6} + \frac{c_1 x^2}{2} + c_2x \Big|_0^1 &=  \frac{1}{6} \\
+    \frac{ - \lambda}{6} + \frac{c_1}{2} + c_2 &=  \frac{1}{6} \\
+    \lambda = 3c_1 + 6c_2 -1
+\end{align}
+So the optimal solution is:
+\begin{equation}
+    y^(x) &= - \frac{3c_1 + 6c_2 -1}{2}x^2 + c_1x + c_2  \\
+\end{equation}
+Given the boundary conditions, we could also easily calculate the values of $c_1$ and $c_2$.
+\QEDB
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 2.37 (Dido's Problem)}
+\emph{Show that optimal curves for Dido's problem are circular arcs.}\\
+\\
+\textbf{Solution:}\\
+\\
+We want to maximize the area under a curve of fixed length. Let's consider the Dido's problem formulated as following: 
+\begin{align}
+    &\max_{y: [a,b] \to \mathbb{R}} J(y) = \int_a^b y(x) dx   \\
+    & \text{subject to } y(a) = y(b) = 0, \hspace{0.5cm} \int_a^b \sqrt{1 + (y'(x))^2} dx = C_0
+\end{align}
+Let's also consider the simplified notation $y(x) = y$ and $y'(x) = y'$ for convenience.\\
+Thus, we can consider the first-order necessary condition for integral constrained optimality:
+\begin{equation}
+    \left( L_y - \frac{d}{dx}L_{y'} \right) + \lambda \left( M_y - \frac{d}{dx}M_{y'} \right) = 0, \hspace{0.5cm} \forall x \in [a,b]
+\end{equation}
+where $L = y$ and $M = \sqrt{1 + y'^2}$. Substituting, we obtain:
+\begin{align}
+    1 - \lambda \frac{d}{dx} \frac{ y'}{\sqrt{1 + y'^2}} & = 0 \\
+    \frac{d}{dx} \frac{\lambda y'}{\sqrt{1 + y'^2}} & = 1 \\
+    \frac{d}{dx} \frac{\lambda y'}{\sqrt{1 + y'^2}} & = x + c_0 \\
+    \lambda ^ 2 y'^2 & = (1 + y'^2) ( x + c_0)^2 \\
+    (\lambda ^2 - (x - c_0) ^2 ) y'^2 & = (x + c_0) ^2 \\
+    y' & = \frac{x+c_o}{ \sqrt{ \lambda^2 - (x- c_0)^2}} \\
+    y' & = \int \frac{x+c_o}{ \sqrt{ \lambda^2 - (x- c_0)^2}} dx \\
+\end{align}
+
+We can integrate by substituting $ u = \lambda^2 - (x+c_0 )^2 $ and  $-du/2 = (x + c_0)dx $ , thus: \\
+\begin{equation}
+    y(u) = - \frac{1}{2} \int \frac{du}{\sqrt{u}} = - \sqrt{u}  + c_1
+\end{equation}
+Substituting again, we get:
+\begin{align}
+    y &= - \sqrt{\lambda^2 - (x+c_0)^2} + c1 \\
+    (x + c_0)^2 + (y - c_1)^2 &= \lambda^2\\
+\end{align}
+which describes a circle. We can assert that, given the geometry of the problem, this extremal should be indeed a maximizer of the area functional and not a minimizer and thus we have shown that curves solving Dido's problem are circular arcs.
+\QEDB
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 2.38 (The Catenary Problem)}
+\emph{Show that the optimal curves for the catenary problem satisfy}
+\begin{equation}
+    y(x) = c \cosh{x/c}, \hspace{0.5cm} c>0
+\end{equation}
+\\
+\textbf{Solution:}\\
+\\
+Since the catenary will take the shape minimizing the potential energy, the problem can be stated as following:
+\begin{equation}
+    \min_{y:[a, b] \to þ0, \infty)} J(y) = \int_a^b y(x) \sqrt{1 + (y'(x))^2} dx
+\end{equation}
+subject to
+\begin{equation}
+    \int_a^b  \sqrt{1 + (y'(x))^2} dx = C_0, \hspace{0.5 cm} y(a) = y_0 ,\hspace{0.5cm} y(b) = y_1
+\end{equation}
+As in the previous exercises, let's also consider the simplified notation $y(x) = y$ and $y'(x) = y'$ for convenience.\\
+Let's consider the \emph{no x} result of the Euler-Lagrange equations: in this case, the Lagrangian does not depend explicitly on $x$; therefore, the condition can be simplified as following:
+\begin{equation}
+    L - L_{y'}y' = c \text{ with } {c \in \mathbb{R}}
+\end{equation}
+Given that the Langrangian for the problem is $L = y\sqrt{1+y'^2}$, we can write the condition as:
+
+\begin{align}
+    \frac{y y'}{\sqrt{1+y'^2}} - y\sqrt{1+y'^2} &= c \\
+    \frac{y}{\sqrt{1+y'^2}} &= c \\
+\end{align}
+
+Now, we can solve the second order equation to find the first order derivative:
+\begin{align}
+    y^2 &= c^2 +c^2 y'^2 \\
+    y'^2 &= \left( \frac{y}{c} \right) ^2 - 1
+\end{align}
+which yields
+\begin{equation}
+    y' = \pm \sqrt{ \left( \frac{y}{c} \right)^2 - 1}
+\end{equation}
+so,
+\begin{align}
+    \frac{dy}{dx} &= \pm \sqrt{\left( \frac{y}{c} \right) ^2 - 1} \\
+    \pm \frac{dy}{\sqrt{y^2 - c^2}} &= \frac{dx}{c} \\
+    \pm \int \frac{dy}{\sqrt{y^2 - c^2}} &= \int \frac{dx}{c} \\
+\end{align}
+Solving this integrals leads to the follwing solutions:
+\begin{align}
+    &ln \left( \frac{y + \sqrt{y^2 - c^2}}{c} \right) = \frac{x}{c} \\
+    &ln \left( \frac{y - \sqrt{y^2 - c^2}}{c} \right) = - \frac{x}{c} \\
+\end{align}
+which lead to
+\begin{align}
+    &\frac{y + \sqrt{y^2 - c^2}}{c} = e^{\frac{x}{c}} \\
+    &\frac{y - \sqrt{y^2 - c^2}}{c} = e^{-\frac{x}{c}} \\
+\end{align}
+The solution can then be written as:
+\begin{equation}
+    y = c \left( \frac{e^{\frac{x}{c}} + e^{-\frac{x}{c}}}{2} \right)
+\end{equation}
+we can substitute the exponential terms with the hyperbolic cosine
+\begin{equation}
+    \cosh(x/c) = \left( \frac{e^{\frac{x}{c}} + e^{-\frac{x}{c}}}{2} \right)
+\end{equation}
+which leads us to the final equation
+\begin{equation}
+    y(x) = c \cosh(x/c)
+\end{equation}
+which shows the optimal curves for the catenary problem.\\
+Given the numerical conditions, we could also compute the value of $c$. We notice that if the reference frame is with a vertical $y$ axis pointing "up" (opposite direction with respect to the gravitational field), then the parameter satisfies the condition $c > 0$.
+\QEDB
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 2.47}
+\emph{Is Legendre's necessary condition satisfied by the admissible extremal for the problem minimizing}
+\begin{equation}
+    J(y) = \int_0^2 \sqrt{1 + y(x)^2 y'(x)^2} dx
+\end{equation}
+\emph{subject to $y(0) = 1$ and $y(2) = 3$? Find $L_{y'y'}(x,y(x),y'(x))$ explicitly.}\\
+\\
+\textbf{Solution:}\\
+\\
+We have to show that the Legendre's condition is valid, which means that:
+\begin{equation}
+    L_{y'y'}(x, y(x), y'(x)) \geq 0, \hspace{0.5cm} \forall x \in [a, b]
+\end{equation}
+Firstly, we will find the admissible extremal via the Lagrange equation. Let's also consider the simplified notation $y(x) = y$, $y'(x) = y'$ and $L = L(x, y(x), y'(x))$ for convenience.\
+\begin{align}
+    & L = \sqrt{1+y^2y'^2} \\
+    \therefore \hspace{0.2cm} &L_y = \frac{yy'^2}{\sqrt{1+y^2 y'^2}} \\
+    &L_y' = \frac{y^2 y'}{\sqrt{1+y^2 y'^2}} \\
+\end{align}
+The Euler-Lagrange equation becomes:
+\begin{equation}
+    \frac{yy'^2}{\sqrt{1+y^2 y'^2}} = \frac{d}{dx} \frac{y^2 y'}{\sqrt{1+y^2 y'^2}}
+\end{equation}
+A general solution for the equation is the following
+\begin{equation}
+    y(x) = c_2 \sqrt{c_1 +2x}
+\end{equation}
+Given the boundary conditions, we can get:
+\begin{equation}
+    \begin{cases}
+    &y(0) = 1 \\
+    &y(1) = 3 \\
+    \end{cases}
+    \Longrightarrow
+    \begin{cases}
+    &c_2\sqrt{c_1} = 1 \\
+    &c_2\sqrt{c_1 + 4} = 3 \\
+    \end{cases}
+    \Longrightarrow
+    \begin{cases}
+    &c_1 = \frac{1}{2}\\
+    &c_2 = \sqrt{2}\\
+    \end{cases}
+\end{equation}
+
+Therefore the admissible extremal is $y^*(x) = \sqrt{2} \sqrt{\frac{1}{2} +2x} $
+Now, let's verify the Legendre's condition:
+\begin{equation}
+        L_{y'y'} = \frac{y^2(1+ y'^2 y^2 - y'^2 )}{(\sqrt{1+y^2 y'^2})^3} \geq 0, \hspace{0.5cm} \forall x \in [a,b]
+\end{equation}
+which is equivalent to verifying that $1+ y'^2 y^2 - y'^2 \geq 0$. This yields:
+\begin{align}
+    &y'^2 y^2 - y'^2 \geq -1 \\
+    &y'^2 (y^2 - 1) \geq -1
+\end{align}
+which always holds given the even more restrictive condition $y^2 - 1 \geq 0$. Let's subsitute:
+\begin{align}
+    &\left( \sqrt{2} \sqrt{\frac{1}{2} +2x} \right) - 1 \geq 0 \\
+    &\cancel{1} + 4x \cancel{-1} \geq 0 \\
+    &4x \geq 0 \hspace{0.5cm} \forall x \in [a,b]
+\end{align}
+Hence, $L_{y'y'}(x, y(x), y'(x)) \geq 0, \hspace{0.2cm} \forall x \in [a, b]$ and thus we have shown the Legendre's condition for optimality holds.
+\QEDB
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \subsection{Exercise TEMPLATE}
+% \emph{}
+% \\
+% \textbf{Solution:}\\
+% \\

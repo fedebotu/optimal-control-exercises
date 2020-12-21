@@ -1,0 +1,373 @@
+\section{Exercises from Lecture 1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 1.13}
+\emph{Prove the above lemma:  "If scalar sequence is monotonically nondecreasing and bounded above, then it converges. Similarly, if a scalar sequence is monotonically nonincreasing and bounded below, then it converges."}\\
+\\
+\textbf{Solution:} \\
+\\
+We first prove the convergence for the monotonically nondecreasing and bounded above series.\\
+Let $(x_k)_k \in \mathbb{N}$ be such a sequence where $x_k$ are its terms. Since by assumption the series $(x_k)$ is bounded above, then there exists a finite $c $ = sup$_k (x_k)$. Thus, for some $\varepsilon > 0$, there exists a $K$ such that $x_K > c - \varepsilon$; otherwise, $c - \varepsilon$ would be the upper bound and it would contradict the definition of $c$. For every $k > K$, we have that: $|c - x_k| \leq |c - x_K| < \varepsilon$. Hence, the limit of $(x_k)_k \in \mathbb{N}$ is by definition sup$_k(x_k)$; which means that the series converges to that value.\\
+As for the monotonically nondecreasing and bounded below series, it can be easily shown in a similar way by showing its convergence to a $l$ = inf$_n(x_k)$.
+\QEDB
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 1.15}
+\emph{Devise a set X whose supremum exists and find its supremum. What is the maximum of the set? Do the same for the infimum.}\\
+\\
+\textbf{Solution:}\\
+\\
+A simple example of a set with a supremum is the set $\mathcal{S} = \{x \mid |x| \leq 42\}$. In this set, the supremum sup$_{\mathcal{S}} = 42$. In this case, its maximum is also $42$.\\
+As for the infimum, if we take the same set $\mathcal{S}$ then inf$_{\mathcal{S}} = 0$, because of the definition of absolute value. Also in this case, the minimum corresponds to the infimum which is $0$.
+\QEDB
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 1.17}
+\emph{Devise a sequence $(x_k)_{k=1}^{\infty}$ whose upper limit exists and find its upper limit.
+Do the same for the infimum.}\\
+\\
+\textbf{Solution:}\\
+\\
+We can devise the following sequence $(x_k)$ whose upper limit exists:
+\begin{equation}
+    \frac{x}{2x+1} = \frac{1}{3}, \frac{2}{5}, \frac{3}{7}, \dots
+\end{equation}
+We can easily find its upper limit by:
+\begin{equation}
+    \lim_{k \to \infty} sup (x_k)= \frac{1}{2}
+\end{equation}
+As for the infimum, we can devise another sequence $(x_k)$ as:
+\begin{equation}
+    \frac{2x+1}{x} = 3, \frac{5}{2}, \frac{7}{3}, \dots
+\end{equation}
+We can easily find its infimum by:
+\begin{equation}
+    \lim_{k \to \infty} inf (x_k) = 2
+\end{equation}
+\QEDB
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 1.24}
+\emph{Devise examples of an open set and a closed set.}\\
+\\
+\textbf{Solution:}\\
+\\
+An example of an open set $\mathcal{S}$ is the area inside a circle, not including its circumference: $\mathcal{S} = \{x, y \mid x^2 + y^2 < r^2, r \in \mathbb{R} \} $. In this case, its border is not included.\\
+If we take the same set but including its border, so: $\mathcal{S} = \{x, y \mid x^2 + y^2 \leq r^2, r \in \mathbb{R} \} $, then this is an example of closed set.
+\QEDB
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 1.68}
+\emph{Prove the two following propositions.}\\
+\\
+\textbf{Proposition 1 (First-order necessary condition for constrained optimality):} Suppose that $f$ is a $ \mathcal{C}^1$ (continuously differentiable) function and $x^*$ is its local minimum. Then,
+\begin{equation}
+    \langle \nabla f (x^*), d  \rangle \geq 0
+\end{equation}
+for all feasible directions $d$.\\
+\\
+\textbf{Proof:} 
+\\
+We can pick an arbitrary feasible direction $d \in R^n$. Then $ x^* + \alpha d \in D$ for all small enough $\alpha > 0$. We can define a new function $g(\alpha)$ as following:
+\begin{equation}
+    g(\alpha) := f(x^* + \alpha d), \hspace{0.5cm} \alpha > 0
+\end{equation}
+Via the Taylor expansion, we obtain:
+\begin{equation}
+    g(\alpha) = g(0) + g'(0)\alpha + o(\alpha)
+\end{equation}
+We now claim that $g'(0) \geq 0$; we can prove this claim by contradiction.\\
+Suppose that $g'(0) <  0$. By the definition of \emph{small o} we can assert
+\begin{equation}
+    \lim_{\alpha \to 0} \frac{o(\alpha)}{\alpha} = 0
+\end{equation}
+There exists a small enough $\varepsilon > 0$ such that for all $\alpha$ satisfying $0 < \alpha < \varepsilon$ we have
+\begin{align}
+    &\left| \frac{o(\alpha)}{\alpha} \right|< - g'(0) \\ 
+    \therefore &\left| o(\alpha) \right|< -g'(0)\alpha
+\end{align}
+Hence we have
+\begin{equation}
+    g(\alpha) - g(0) = g'(0) \alpha + o(\alpha) \leq  g'(0) \alpha + \left| o(\alpha) \right| < g'(0) \alpha - g'(0) \alpha = 0
+\end{equation}
+However, given that $g(\alpha) := f(x^* + \alpha d)$ this implies that
+\begin{equation}
+    f(x^* + \alpha d) - f(x^*) < 0
+\end{equation}
+Which contradicts the the hypothesis of $x^*$ being a local minimum. Therefore, the claim $g'(0) \geq 0$ is true and by the chain rule:
+\begin{equation}
+    g'(0) = \langle \nabla f(x^*), d \rangle \geq 0
+\end{equation}
+We have thus shown that given that $d$ is an arbitrary feasible direction, $\langle \nabla f(x^*, d \rangle \geq 0$ for all the feasible directions $d$.
+
+
+
+\textbf{Proposition 2 (Second-order necessary condition for constrained optimality):} Suppose that $f$ is a $\mathcal{C}^2$ (continuously differentiable) function and $x^*$ is its local minimum. Then,
+\begin{equation}
+    d^T \nabla ^2 f(x^*) d \geq 0
+\end{equation}
+for all feasible directions $d$ such that
+\begin{equation}
+    \langle \nabla f (x^*), d \rangle = 0
+\end{equation}
+\\
+\textbf{Proof:}\\
+\\
+We can pick an arbitrary feasible direction $d \in R^n$. Then $ x^* + \alpha d \in D$ for all small enough $\alpha > 0$. We can define a new function $g(\alpha)$ as following:
+\begin{equation}
+    g(\alpha) := f(x^* + \alpha d), \hspace{0.5cm} \alpha > 0
+\end{equation}
+Via the Taylor expansion, we obtain:
+\begin{equation}
+    g(\alpha) = g(0) + \cancelto{0}{g'(0)}\alpha + \frac{1}{2} g''(0) \alpha^2 + o(\alpha^2)
+\end{equation}
+where $g'(0)\alpha$ cancels out since $ g'(0)\alpha = \langle \nabla f (x^*), d \rangle = 0 $ by our hypothesis. We claim that $g''(0) \geq 0$; we can prove the claim by contradiction.\\
+Suppose $g''(0) < 0$. There exists a small enough $\varepsilon > 0$ such that for all $\alpha$ satisfying $0 < \alpha < \varepsilon$ we have, following from the definition of \emph{small o}:
+\begin{align}
+    &\left| \frac{0(\alpha^2)}{\alpha^2} \right| < - \frac{1}{2} g''(0) \\
+    \therefore&\left| o(\alpha^2) \right| < - \frac{1}{2} g''(0)\alpha^2
+\end{align}
+Hence this yields
+\begin{equation}
+    g(\alpha) - g(0) = \frac{1}{2}g''(0) \alpha^2 + o(\alpha) \leq  \frac{1}{2}g''(0) \alpha^2 + \left| o(\alpha) \right| < \frac{1}{2}g''(0) \alpha^2 - \frac{1}{2}g''(0) \alpha^2 = 0
+\end{equation}
+However, given that $g(\alpha) := f(x^* + \alpha d)$ this implies that
+\begin{equation}
+    f(x^* + \alpha d) - f(x^*) < 0
+\end{equation}
+Which contradicts the the hypothesis of $x^*$ being a local minimum. Therefore, the claim $g''(0) \geq 0$ is true and by the chain rule:
+\begin{equation}
+    g''(0) = d^T \nabla^2 f(x^*) d \geq 0
+\end{equation}
+We have thus shown that given that $d$ is an arbitrary feasible direction, $d^T \nabla^2 f(x^*) d \geq 0$ for all the feasible directions $d$.
+\QEDB
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 1.69}
+\emph{Suppose that $f$ is a $\mathcal{C}^2$ function and $x^*$ us a point of its domain at which we have $\langle\nabla f(x^*),d \rangle \geq 0$ and $d^T \nabla^2 f(x^*)d > 0$ for every nonzero feasible direction d. Is $x^*$ necessarily a local minimum of f? Prove or give a counterexample.} \\
+\\
+\textbf{Solution:}\\
+\\
+We can pick an arbitrary feasible direction $d \in R^n$. Then $ x^* + \alpha d \in D$ for all small enough $\alpha > 0$. We can define a new function $g(\alpha)$ as following:
+\begin{equation}
+    g(\alpha) := f(x^* + \alpha d), \hspace{0.5cm} \alpha > 0
+\end{equation}
+Via the Taylor expansion, we obtain:
+\begin{equation}
+    g(\alpha) = g(0) + g'(0)\alpha + \frac{1}{2} g''(0) \alpha^2 + o(\alpha^2)
+\end{equation}
+In which the terms $g'(0)$ and $g''(0)$ are, according to our hypotesis:
+\begin{align}
+    &g'(0) = \langle\nabla f(x^*),d \rangle \geq 0 \\
+    \therefore \hspace{0.2cm} &g'(0) \geq 0 \\
+    &\text{and} \\
+    &g''(0) = d^T \nabla^2 f(x^*)d > 0\\
+    \therefore \hspace{0.2cm} &g''(0) > 0
+\end{align}
+If the residual $o(\alpha ^2) \geq 0$, then we have:
+\begin{equation}
+    g(\alpha) - g(0) = g'(0)\alpha + \frac{1}{2} g''(0) \alpha^2 + o(\alpha^2) > 0
+\end{equation}
+Thus implying
+\begin{equation}
+    f(x^* + \alpha d) - f(x^*) > 0
+\end{equation}
+which implies that $x^*$ is a local minimum for $f$ for every nonzero feasible direction $d$. We now need to show the same for the non-positive case.\\
+If the residual $o(\alpha ^2) < 0$, there exists a small enough $\varepsilon > 0$ such that for all $\alpha$ satisfying $0 < \alpha < \varepsilon$ we have, following from the definition of \emph{small o}:
+\begin{align}
+    &\left| \frac{o(\alpha^2)}{\alpha^2} \right| < \frac{1}{2}g''(0) \\
+    &\left| o(\alpha^2 \right| < \frac{1}{2}g''(0) \alpha^2\\  
+    &\text{given that } o(\alpha^2) < 0, \\
+    &o(\alpha^2) > - \frac{1}{2}g''(0) \alpha^2\\
+    \therefore \hspace{0.2cm} &\frac{1}{2}g''(0) \alpha^2 + o(\alpha^2) > 0
+\end{align}
+Therefore, as in the previous case, we get
+\begin{equation}
+    g(\alpha) - g(0) = g'(0)\alpha + \frac{1}{2} g''(0) \alpha^2 + o(\alpha^2) > 0
+\end{equation}
+Thus implying
+\begin{equation}
+    f(x^* + \alpha d) - f(x^*) > 0
+\end{equation}
+which implies that $x^*$ is a local minimum for $f$ for every nonzero feasible direction $d$.\\
+We have thus proved that given the conditions $\langle\nabla f(x^*),d \rangle \geq 0$ and $d^T \nabla^2 f(x^*)d > 0$, $x^*$ is a local minimum for $f$ for every nonzero feasible direction $d$.
+\QEDB
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 1.78}
+\emph{Give an example where a local minimum $x^*$ is not a regular point and the above necessary condition (namely first-order necessary condition for constrained optimality) is false (justify both of these claims).}\\
+\\
+\textbf{Solution:}\\
+\\
+Let's consider the following function:
+\begin{equation}
+    f(x_1, x_2) = 42(x_1 + x_2)
+\end{equation}
+given the following
+\begin{align}
+    &h_1(x_1, x_2) = (x_1 - 1) ^2 + x_2^2 = 1\\
+    &h_2(x_1, x_2) = (x_2 - 2) ^2 + x_2^2 = 4\\
+\end{align}
+The problem only has one feasible point $(x_1, x_2) = (0, 0)$. The function $f$ is then minimized at this feasible point, thus leading to $x^* = (x_1^*, x_2^*) = (0, 0) $. We have:
+\begin{equation}
+    \nabla f(x^*) = \begin{bmatrix} 42 \\ 42 \end{bmatrix}, \hspace{0.2cm} \nabla h_1(x^*) = \begin{bmatrix} -2 \\ 0 \end{bmatrix}, \hspace{0.2cm} \nabla h_2(x^*) = \begin{bmatrix} -4 \\ 0 \end{bmatrix}
+\end{equation}
+We notice that:
+\begin{equation}
+    \nabla h_2(x^*) = 2 \nabla h_1(x^*) 
+\end{equation}
+which implies they are linearly dependent. Therefore the point $x^* = (x_1^*, x_2^*) = (0, 0) $ is by definition not a regular point.\\
+The first-order necessary condition for constrained optimality is true if there exist real numbers $\lambda_1^*, \lambda_2^*$ such that:
+\begin{equation}
+    \nabla f(x^*) + \lambda_1^* \nabla h_1 (x^*) + \lambda_2^* \nabla h_2 (x^*) = 0
+\end{equation}
+which leads to
+\begin{equation}
+    \begin{bmatrix} 42 \\ 42 \end{bmatrix} + \lambda_1^* \begin{bmatrix} -2 \\ 0 \end{bmatrix} + \lambda_2^* \begin{bmatrix} -4 \\ 0 \end{bmatrix} = 0
+\end{equation}
+However, there exist no such $\lambda_1^*, \lambda_2^*$ that can cancel out the second element of $\nabla f(x^*)$; this is due to the linearly dependent $\nabla h_1(x^*)$ and $\nabla h_2(x^*)$. Therefore, we have shown the necessary condition is false. 
+
+\QEDB
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 1.81}
+\emph{Prove that the set of continuous functions $f:[a,b] \to \mathbb{R}, f \in \mathcal{C}^0$ is a vector space with typical addition and scalar multiplication.}\\
+\\
+\textbf{Solution:}\\
+\\
+Let's take the generic functions $f, g$ and $h$ which satisfy the above conditions. Let's consider a generic point $x \in [a,b]$, and the values of the functions are $f(x) = i, g(x) = j, h(x) = k$, where $i, j, k \in \mathbb{R}$. We also consider the scalar values $\alpha, \beta \in \mathbb{R}$.
+\\
+We have to show the vector addition + satisfies the following conditions $\forall x$:
+\begin{itemize}
+    \item Closure: $ f(x) + g(x) = i + j \in \mathbb{R}$
+    \item Commutative law: $f(x) + g(x) = i + j = j + i = g(x) + f(x)$
+    \item Associative law: $(f(x) + g(x)) + h(x) = (i + j) + k = i + (j + k) = g(x) + (f(x) + h(x))$
+    \item Additive identity: $f(x + 0) = f(0 + x) = f(x) = i$
+    \item Additive inverses: given $f(x) = i$, we can easily find a function, say $l: [a,b] \to \mathbb{R}$ such that $l(x) = -i$
+\end{itemize}
+Since these conditions are all satisfied, then the vector addition + is defined $\forall x$.\\
+We now have to show that the operation $\cdot$ scalar multiplication satisfies the following conditions:
+\begin{itemize}
+    \item Closure: $\alpha \cdot f(x) = \alpha \cdot i \in \mathbb{R}$
+    \item Distributive law: $\alpha (f(x) + g(x)) = \alpha \cdot i + \alpha \cdot j = \alpha f(x) + \alpha g(x)$
+    \item Distributive law: $(\alpha + \beta)\cdot f(x) = (\alpha + \beta) \cdot i = \alpha \cdot i + \beta \cdot i = \alpha f(x) + \beta f(x) $
+    \item Associative law: $\alpha (\beta \cdot f(x)) = \alpha (\beta \cdot i) = \alpha \cdot \beta \cdot i =  (\alpha \cdot \beta) i =  (\alpha \cdot \beta) f(x)$
+    \item Unitary law: $1 \cdot f(x) = 1 \cdot i = i = f(x)$
+\end{itemize}
+Since these conditions are all satisfied, then the scalar multiplication is also defined $\forall x$.
+\QEDB
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 1.84}
+\emph{For $y \in \mathcal{C}^0$, define:}
+\begin{equation}
+    \mid\mid y \mid \mid _{\mathcal{L}_p} := \left( \int_a^b \mid y(x) \mid ^p dx \right) ^{1/p}
+\end{equation}
+\emph{where $p$ is a positive integer and $a, b \in \mathbb{R}$ with $a < b$. Prove that it is an inner product on the vector space $\mathbb{C}^0$}\\
+\\
+\textbf{Solution:}\\
+\\
+We need to prove that the expression represents a norm. Thus, it has to satisfy the following properties:
+\begin{itemize}
+    \item The expression must be positive $\forall y(x) \in \mathbb{C}^0$. We can observe that $\med y(x) \med$ is always positive. The exponential term $p$ lets the expression be positive. Therefore, the integral defined for $b > a$ will also let the expression be positive. The result will be elevated to the $1/p$ exponential, which makes the total expression always positive.
+    \item Given $c \in \mathbb{R}$, we have that:
+    \begin{equation}
+        \mid\mid cy \mid \mid _{\mathcal{L}_p} = \left( \int_a^b \mid c y(x) \mid ^p dx \right) ^{1/p} =  \left( \int_a^b \mid c \mid ^p  \mid y(x) \mid ^p dx \right) ^{1/p}
+    \end{equation}
+    So, we can move $c$ out of the integral and get the result:
+    \begin{equation}
+        \left( \mid c \mid ^p  \int_a^b \mid c \mid ^p  \mid y(x) \mid ^p dx \right) ^{1/p} = \mid c \mid \left( \int_a^b \mid c \mid ^p  \mid y(x) \mid ^p dx \right) ^{1/p} = \mid \mid c \mid \mid \cdot \mid \mid y(x)\mid \mid_{\mathcal{L}_p} 
+    \end{equation}
+    \item We want to show that only $y(x) = 0$ will make the norm zero. We can notice that, for our conditions, the only way to make the norm zero is either to have $a = b$, which contradicts our hypotesis, or to have $\mid y(x) \mid = 0$; the only way is of course to have $y(x) = 0$.
+    \item We want to show that the triangle inequality holds, which means that:
+    \begin{equation}
+        \left( \int_a^b \mid y(x) + z(x) \mid ^p dx \right) ^{1/p} \leq \left( \int_a^b \mid y(x) \mid ^p dx \right) ^{1/p} + \left( \int_a^b \mid z(x) \mid ^p dx \right) ^{1/p}
+    \end{equation}
+    However, the exponential function is a \emph{convex function}. Therefore, the following will hold:
+    \begin{equation}
+        \mid y(x) + z(x) \mid ^p  \leq \mid y(x)  \mid ^p  + \mid z(x) \mid ^p 
+    \end{equation}
+    The integral function maintains the inequality:
+    \begin{equation}
+        \left( \int_a^b \mid y(x) + z(x) \mid ^p dx \right) \leq \left( \int_a^b \mid y(x) \mid ^p dx \right) + \left( \int_a^b \mid z(x) \mid ^p dx \right)
+    \end{equation}
+    And the other exponential function too:
+    \begin{equation}
+        \left( \int_a^b \mid y(x) + z(x) \mid ^p dx \right)^{1/p} \leq \left[ \left( \int_a^b \mid y(x) \mid ^p dx \right) + \left( \int_a^b \mid z(x) \mid ^p dx \right) \right] ^{1/p}
+    \end{equation}
+    The new exponential is also a convex function. Therefore, the following the chain of equations hold:
+    \begin{align*}
+        \left[ \left( \int_a^b \mid y(x) \mid ^p dx \right) + \left( \int_a^b \mid z(x) \mid ^p dx \right) \right] ^{1/p} \leq ... \\ ... \leq \left( \int_a^b \mid y(x) \mid ^p dx \right) ^{1/p} + \left( \int_a^b \mid z(x) \mid ^p dx \right) ^{1/p}
+    \end{align*}
+    Thus proving our hypothesis.
+\end{itemize}
+\QEDB
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 1.85}
+\emph{For $x, y \in \mathcal{C}^0$, define}
+\begin{equation}
+    \langle x, y \rangle = \int_a^b x(t)y(t) dt
+\end{equation}
+\emph{where $a, b \in \mathbb{R}$ with $a < b$. Prove that it is an inner product on the vector space $\mathcal{C}^0$.}\\
+\\
+\textbf{Solution:}\\
+\\
+If the above expression satisfies the following conditions, then it is an inner product:
+\begin{itemize}
+    \item Conjugate symmetry: 
+    \begin{equation}
+        \langle x, y \rangle = \int_a^b x(t)y(t) dt =\int_a^b  y(t)x(t) dt = \overline{\langle y, x \rangle }
+    \end{equation}
+    The expression hold because of the commutative property of the $\mathbb{R}$ space. The conjugate symmetry is just symmetry in $\mathbb{R}$.
+    \item Linearity:
+    \begin{equation}
+        \langle \alpha x, y \rangle = \int_a^b \alpha x(t)y(t) dt = \alpha \int_a^b  y(t)x(t) dt = \alpha  \langle x, y \rangle
+    \end{equation}
+    holds because of the properties of the integral, where $\alpha \in \mathbb{R}$.
+    Also, we can see that the following holds
+    \begin{equation}
+        \langle  x + y, z \rangle = \int_a^b \alpha \left[x(t)+y(t) \right] z(t) dt = \int_a^b  x(t)z(t) dt + \int_a^b  y(t)z(t) dt = \langle  x , z \rangle + \langle  y, z \rangle
+    \end{equation}
+    thus satisfying the linearity conditions.
+    \item Positive definiteness: 
+    \begin{equation}
+        \langle x, x \rangle = \int_a^b x(t)x(t) dt = \int_a^b x(t)^2 dt > 0
+    \end{equation}
+    where $x(t)^2 > 0$. Thus, since the integral of a positive function is positive, by our definition the expression will be positive unless for $x(t) = 0$.
+\end{itemize}
+Therefore, we can conclude the expression is indeed an inner product on the vector space $\mathbb{C}^0$.
+\QEDB
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercise 1.96}
+\emph{Consider the space $\mathcal{C}^0([0,1]) \to \mathbb{R}$, let $g : \mathbb{R} \to \mathbb{R}$ be a $\mathcal{C}^1$ function, and define the functional $J$ on $V$ by $J(y) = \int_0^1 g'(y(x))dx$. Show that its first variation exists and it is given by the formula}
+\begin{equation}
+    \delta J\med_y (\eta) = \int_0^1 g'(y(x)) \eta (x) dx
+\end{equation}
+\\
+\textbf{Solution:}\\
+\\
+From the definition of first variation, if we take the following function:
+\begin{equation}
+    h(\alpha) := J(y + \alpha \eta(x))
+\end{equation}
+then the first variation functional will be defined by:
+\begin{equation}
+    \delta J\med_y (\eta(x)) = h'(0)
+\end{equation}
+where $\eta(x)$ a perturbation and $\alpha \in \mathbb{R}$. The function becomes:
+\begin{equation}
+    J(y) = \int_0^1 g'(y(x +\alpha \eta (x)) dx
+\end{equation}
+Thus, we calculate the derivative
+
+\begin{equation}
+    h'(0) = \frac{\partial}{\partial\alpha}h(0) = \int_0^1 g'(y(x + \alpha\eta(x)))\eta(x) dx =     \int_0^1 g'(y(x))\eta(x)dx
+\end{equation}
+And finally, since $h'(0) = \delta J\med_y (\eta)$, then:
+\begin{equation}
+    \delta J\med_y (\eta(x)) = \int_0^1 g'(y(x))\eta(x)dx    
+\end{equation} 
+\QEDB
