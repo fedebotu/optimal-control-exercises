@@ -221,7 +221,7 @@ $$\begin{aligned}
         &x_1(0) = x_0 \smallspace x_2(0) = 0 \\
         &x_1(t_f) = 0, \smallspace x_2(t_f) = 0
     \end{cases}\end{aligned}$$\
-\
+
 
 Exercise 4.11 (Linear-quadratic problem)
 ----------------------------------------
@@ -307,7 +307,7 @@ Exercise 4.14
     &\text{subject to}\\
     &\Dot{x}(t) = u(t), \smallspace x(0)=x_0\end{aligned}$$ *where
 $x_0 \in \mathbb{R}$ is an initial state, $T>0$ is a fixed final time.*\
-\
+
 
 Exercise 4.15
 -------------
@@ -387,8 +387,7 @@ $\theta(t)$ and $\Dot{\theta}(t)$ are very small)*
 
 $$\begin{bmatrix}
     \Dot{x}_1(t) \\ \Dot{x}_3(t) \\ \Dot{x}_3(t) \\  \Dot{x}_4(t) \\ 
-\end{bmatrix}
-=
+\end{bmatrix}=
 \begin{bmatrix}
     0 & 1 & 0 & 0 \\
     0 & 0 & -\frac{mg}{M} & 0 \\
@@ -431,7 +430,6 @@ g=9.8.*\
 5.  *Change the weight and see how the performance changes and discuss
     about the results.*
 
-\
 
 # Lecture 6
 
