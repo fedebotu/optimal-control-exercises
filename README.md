@@ -6,11 +6,11 @@ This repository contains Optimal Control coursework for KAIST: it contains some 
 
 ## 🖼️ Examples
 <p align="center">
-  <img src="https://github.com/Juju-botu/optimal-control-exercises/blob/main/images/example_screenshot0.png" alt="Example screenshot0">
+  <img src="https://github.com/Juju-botu/optimal-control-exercises/blob/main/images/example_screenshot0.png" width=600 alt="Example screenshot0">
 </p>
 
 <p align="center">
-  <img src="https://github.com/Juju-botu/optimal-control-exercises/blob/main/images/example_screenshot.png" alt="Example screenshot">
+  <img src="https://github.com/Juju-botu/optimal-control-exercises/blob/main/images/example_screenshot.png" width=600  alt="Example screenshot">
 </p>
 
 ## 📬 Feedback
