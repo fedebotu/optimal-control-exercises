@@ -1,8 +1,8 @@
 # Optimal Control Exercises
 [![made-with-latex](https://img.shields.io/badge/Made%20with-LaTeX-1f425f.svg)](https://www.latex-project.org/)
+Coursework for the Optimal Control course at KAIST.  
 
 ## 🗂 Contents
-I uploaded this repository as Optimal Control coursework for KAIST.
 This repo contains some exercise solutions for Daniel Liberzon's _Calculus of Variations and Optimal Control Theory: A Concise Introduction_ book and other problems.
 
 ## 🖼️ Examples
