@@ -1,6 +1,5 @@
 # Optimal Control Exercises
 [![made-with-latex](https://img.shields.io/badge/Made%20with-LaTeX-1f425f.svg)](https://www.latex-project.org/)
-Coursework for the Optimal Control course at KAIST.  
 
 ## 🗂 Contents
 This repo contains some exercise solutions for Daniel Liberzon's _Calculus of Variations and Optimal Control Theory: A Concise Introduction_ book and other problems.
@@ -13,6 +12,13 @@ transformation; mechanical interpretation; constraints; second variation and Leg
 controls; dynamic programming; sufficient conditions for optimality
 - [Lecture 5](#lecture-5): _The Hamilton-Jacobi-Bellman equation_: HJB equations; viscosity solutions of the HJB equation
 - [Lecture 6](#lecture-6): _The Linear Quadratic Regulator_: LQR problems
+
+### Note
+The book is part of coursework for the Optimal Control course from professor Donghwan Lee at KAIST. Many exercises are taken from Liberzon's book, but not all of them - and many are not in order as well. I could not find a solution manual at the time, but searching in Google with certain keywords helped for some of the exercises. If you would like to improve the repo, please read the [Feedback](#mailbox_with_mail-feedback) section!
+
+The version of the text is the following:
+
+[1] D. Liberzon, Calculus of Variations and Optimal Control Theory: A Concise Introduction. Princeton ; Oxford: Princeton University Press, 2012.
 
 ## 🖼️ Examples
 <p align="center">
